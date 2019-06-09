@@ -21,7 +21,7 @@ import java.util.Set;
 @NamedQueries(
         {
                 @NamedQuery(
-                        name = "sk.fri.uniza.core.getAll",
+                        name = "sk.fri.uniza.core.User.getAll",
                         query = "SELECT p FROM User p"
                 )
         })

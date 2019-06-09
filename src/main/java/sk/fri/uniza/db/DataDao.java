@@ -42,6 +42,7 @@ public class DataDao extends AbstractDAO<Data> implements BasicDao<Data, Long> {
 
         dataDB.add(data1);
         dataDB.add(data2);
+
     }
 
     /**
@@ -75,13 +76,18 @@ public class DataDao extends AbstractDAO<Data> implements BasicDao<Data, Long> {
 
     @Override
     public List<Data> getAll() {
+        return list(namedQuery("sk.fri.uniza.core.Data.getAll"));
+    }
+
+    /*@Override
+    public List<Data> getAll() {
         CriteriaBuilder builder = currentSession().getCriteriaBuilder();
         CriteriaQuery<Data> criteriaQuery = builder.createQuery(Data.class);
         Root<Data> root = criteriaQuery.from(Data.class);
         criteriaQuery.select(root);
         List<Data> list = list(criteriaQuery);
         return list;
-    }
+    }*/
 
     @Override
     public Paged<List<Data>> getAll(int limit, int page) {

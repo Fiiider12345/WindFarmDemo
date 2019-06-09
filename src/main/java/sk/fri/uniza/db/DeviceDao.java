@@ -69,13 +69,18 @@ public class DeviceDao extends AbstractDAO<Device> implements BasicDao<Device, L
 
     @Override
     public List<Device> getAll() {
+        return list(namedQuery("sk.fri.uniza.core.Device.getAll"));
+    }
+
+    /*@Override
+    public List<Device> getAll() {
         CriteriaBuilder builder = currentSession().getCriteriaBuilder();
         CriteriaQuery<Device> criteriaQuery = builder.createQuery(Device.class);
         Root<Device> root = criteriaQuery.from(Device.class);
         criteriaQuery.select(root);
         List<Device> list = list(criteriaQuery);
         return list;
-    }
+    }*/
 
     @Override
     public Paged<List<Device>> getAll(int limit, int page) {

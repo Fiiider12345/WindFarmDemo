@@ -118,6 +118,7 @@ public class WindFarmDemoApplication extends Application<WindFarmDemoConfigurati
         // Setup user auth
         registerUserAuth(configuration, environment);
 
+
         // Register new error page handler
         environment.jersey().register(new ErrorEntityWriter<ErrorMessage, View>(MediaType.TEXT_HTML_TYPE, View.class) {
             @Override
@@ -132,11 +133,13 @@ public class WindFarmDemoApplication extends Application<WindFarmDemoConfigurati
         // Load key that is used to sign the JWT token
         KeyPair secreteKey = configuration.getOAuth2Configuration().getSecreteKey(false);
 
-        // UsersDAO
+        // UsersDAO, DataDao, DeviceDao
         final UsersDao usersDao = UsersDao.createUsersDao(hibernate.getSessionFactory());
+        final DataDao datasDao = DataDao.createDataDao(hibernate.getSessionFactory());
+        final DeviceDao devicesDao = DeviceDao.createDeviceDao(hibernate.getSessionFactory());
 
         // Initialize OAuth 2 authorization mechanism
-        OAuth2Authenticator oAuth2Authenticator = new UnitOfWorkAwareProxyFactory(hibernate).create(OAuth2Authenticator.class, new Class[]{UsersDao.class, Key.class}, new Object[]{usersDao, secreteKey.getPublic()});
+        OAuth2Authenticator oAuth2Authenticator = new UnitOfWorkAwareProxyFactory(hibernate).create(OAuth2Authenticator.class, new Class[]{UsersDao.class,DataDao.class, DeviceDao.class, Key.class}, new Object[]{usersDao, datasDao, devicesDao, secreteKey.getPublic()});
         environment.jersey().register(new AuthDynamicFeature(
                 new OAuthCredentialAuthFilter.Builder<User>()
                         .setAuthenticator(oAuth2Authenticator)
@@ -145,7 +148,7 @@ public class WindFarmDemoApplication extends Application<WindFarmDemoConfigurati
                         .buildAuthFilter()
         ));
 
-        // Generate fake users
+        // Generate fake users, data, device
         oAuth2Authenticator.generateUsers();
 
         // Enable the resource protection annotations: @RolesAllowed, @PermitAll & @DenyAll
@@ -161,20 +164,17 @@ public class WindFarmDemoApplication extends Application<WindFarmDemoConfigurati
         // Create Dao access objects
         final UsersDao usersDao = UsersDao.createUsersDao(hibernate.getSessionFactory());
         final PersonDao personDao = new PersonDao(hibernate.getSessionFactory());
-        //final DataDao dataDao = new DataDao(hibernate.getSessionFactory());
-        final DataDao dataDao = DataDao.createDataDao(hibernate.getSessionFactory());
-        //final DeviceDao deviceDao = new DeviceDao(hibernate.getSessionFactory());
-        //dataDao.createDataDao(hibernate.getSessionFactory());
-        final DeviceDao deviceDao = DeviceDao.createDeviceDao(hibernate.getSessionFactory());
-        //deviceDao.createDeviceDao(hibernate.getSessionFactory());
+        final DataDao datasDao = DataDao.createDataDao(hibernate.getSessionFactory());
+        final DeviceDao devicesDao = DeviceDao.createDeviceDao(hibernate.getSessionFactory());
 
 
         KeyPair secreteKey = configuration.getOAuth2Configuration().getSecreteKey(false);
         final LoginResource loginResource = new LoginResource(secreteKey, usersDao, OAuth2Clients.getInstance());
         final UsersResource usersResource = new UsersResource(usersDao);
         final PersonResource personResource = new PersonResource(personDao);
-        final DataResource dataResource = new DataResource(dataDao);
-        final DeviceResource deviceResource = new DeviceResource(deviceDao);
+        final DataResource dataResource = new DataResource(datasDao);
+        final DeviceResource deviceResource = new DeviceResource(devicesDao);
+
 
         environment.jersey().register(helloWorldResource);
         environment.jersey().register(loginResource);
@@ -182,6 +182,7 @@ public class WindFarmDemoApplication extends Application<WindFarmDemoConfigurati
         environment.jersey().register(personResource);
         environment.jersey().register(dataResource);
         environment.jersey().register(deviceResource);
+
      }
 
 }

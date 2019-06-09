@@ -103,7 +103,7 @@ public class UsersDao extends AbstractDAO<User> implements BasicDao<User, Long> 
 
     @Override
     public List<User> getAll() {
-        return list(namedQuery("sk.fri.uniza.core.getAll"));
+        return list(namedQuery("sk.fri.uniza.core.User.getAll"));
     }
 
     /**

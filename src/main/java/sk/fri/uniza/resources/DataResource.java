@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("/data")
+@Produces(MediaType.APPLICATION_JSON)
 public class DataResource {
     private final Logger myLogger = LoggerFactory.getLogger(this.getClass());
     private DataDao dataDao;

@@ -8,13 +8,13 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "Data")
+@Table(name = "data")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @NamedQueries(
         {
                 @NamedQuery(
                         name = "sk.fri.uniza.core.Data.getAll",
-                        query = "SELECT p FROM Data p"
+                        query = "SELECT d FROM Data d"
                 )
         })
 
