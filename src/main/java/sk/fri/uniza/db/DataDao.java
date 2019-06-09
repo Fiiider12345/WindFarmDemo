@@ -107,8 +107,7 @@ public class DataDao extends AbstractDAO<Data> implements BasicDao<Data, Long> {
 
     @Override
     public Long save(Data data) throws HibernateException {
-        persist(data);
-        return data.getId();
+        return persist(data).getId();
     }
 
     @Override

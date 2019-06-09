@@ -17,7 +17,11 @@ import io.dropwizard.views.ViewBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import sk.fri.uniza.api.Person;
 import sk.fri.uniza.api.Phone;
 import sk.fri.uniza.auth.OAuth2Authenticator;
@@ -28,6 +32,7 @@ import sk.fri.uniza.core.Data;
 import sk.fri.uniza.core.Device;
 import sk.fri.uniza.core.User;
 import sk.fri.uniza.db.DataDao;
+import sk.fri.uniza.db.DeviceDao;
 import sk.fri.uniza.db.PersonDao;
 import sk.fri.uniza.db.UsersDao;
 import sk.fri.uniza.health.TemplateHealthCheck;
@@ -44,7 +49,8 @@ public class WindFarmDemoApplication extends Application<WindFarmDemoConfigurati
     public static void main(final String[] args) throws Exception {
         new WindFarmDemoApplication().run(args);
 
-    }
+
+     }
 
     @Override
     public String getName() {
@@ -155,7 +161,12 @@ public class WindFarmDemoApplication extends Application<WindFarmDemoConfigurati
         // Create Dao access objects
         final UsersDao usersDao = UsersDao.createUsersDao(hibernate.getSessionFactory());
         final PersonDao personDao = new PersonDao(hibernate.getSessionFactory());
-        final DataDao dataDao = new DataDao(hibernate.getSessionFactory());
+        //final DataDao dataDao = new DataDao(hibernate.getSessionFactory());
+        final DataDao dataDao = DataDao.createDataDao(hibernate.getSessionFactory());
+        //final DeviceDao deviceDao = new DeviceDao(hibernate.getSessionFactory());
+        //dataDao.createDataDao(hibernate.getSessionFactory());
+        final DeviceDao deviceDao = DeviceDao.createDeviceDao(hibernate.getSessionFactory());
+        //deviceDao.createDeviceDao(hibernate.getSessionFactory());
 
 
         KeyPair secreteKey = configuration.getOAuth2Configuration().getSecreteKey(false);
@@ -163,13 +174,14 @@ public class WindFarmDemoApplication extends Application<WindFarmDemoConfigurati
         final UsersResource usersResource = new UsersResource(usersDao);
         final PersonResource personResource = new PersonResource(personDao);
         final DataResource dataResource = new DataResource(dataDao);
+        final DeviceResource deviceResource = new DeviceResource(deviceDao);
 
         environment.jersey().register(helloWorldResource);
         environment.jersey().register(loginResource);
         environment.jersey().register(usersResource);
         environment.jersey().register(personResource);
         environment.jersey().register(dataResource);
-
+        environment.jersey().register(deviceResource);
      }
 
 }
