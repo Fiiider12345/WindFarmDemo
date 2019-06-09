@@ -43,6 +43,15 @@ public class UsersDao extends AbstractDAO<User> implements BasicDao<User, Long> 
                 .setEmail("admin@gmail.com")
                 .createPerson();
 
+        Person user3 = new PersonBuilder()
+                .setUserName("ja@gmail.com")
+                .setRoles(Set.of(Role.ADMIN))
+                .setPassword("heslo")
+                .setFirstName("Juraj")
+                .setLastName("Juraj")
+                .setEmail("ja@gmail.com")
+                .createPerson();
+
         userDB = Stream.generate(() -> new PersonBuilder()
                 .setUserName(UUID.randomUUID().toString())
                 .setRoles(Set.of(Role.USER_READ_ONLY))
@@ -55,6 +64,7 @@ public class UsersDao extends AbstractDAO<User> implements BasicDao<User, Long> 
                 .collect(Collectors.toList());
         userDB.add(user1);
         userDB.add(user2);
+        userDB.add(user3);
     }
 
     private UsersDao(SessionFactory sessionFactory) {

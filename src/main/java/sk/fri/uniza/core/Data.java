@@ -36,6 +36,14 @@ public class Data {
     @Column
     private String dateOfStart;
 
+    public Data(Data other) {
+        this.id = other.id;
+        this.value = other.value;
+        this.idDevice = other.idDevice;
+        this.dateOfStart = other.dateOfStart;
+    }
+
+    // Hibernate need default constructor
     public Data() {
     }
 
@@ -52,7 +60,7 @@ public class Data {
         this.dateOfStart = dateOfStart;
     }
 
-    @JsonProperty
+    //@JsonProperty
     public Long getId() {
         return id;
     }
@@ -61,7 +69,7 @@ public class Data {
         this.id = id;
     }
 
-    @JsonProperty
+    //@JsonProperty
     public Float getValue() {
         return value;
     }
@@ -70,7 +78,7 @@ public class Data {
         this.value = value;
     }
 
-    @JsonProperty
+    //@JsonProperty
     public int getIdDevice() {
         return idDevice;
     }
@@ -79,7 +87,7 @@ public class Data {
         this.idDevice = idDevice;
     }
 
-    @JsonProperty
+    //@JsonProperty
     public String getDateOfStart() {
         return dateOfStart;
     }

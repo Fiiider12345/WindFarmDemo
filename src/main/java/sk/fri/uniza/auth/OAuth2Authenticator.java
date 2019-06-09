@@ -9,12 +9,16 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.SignatureException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sk.fri.uniza.core.Data;
+import sk.fri.uniza.core.DataBuilder;
 import sk.fri.uniza.core.User;
 import sk.fri.uniza.core.UserBuilder;
+import sk.fri.uniza.db.DataDao;
 import sk.fri.uniza.db.UsersDao;
 
 import java.security.Key;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -36,7 +40,7 @@ public class OAuth2Authenticator implements Authenticator<String, User> {
     @UnitOfWork
     public void generateUsers() {
         UsersDao.getUserDB().forEach(usersDao::save);
-    }
+     }
 
     @Override
     public Optional<User> authenticate(String jwtToken) throws AuthenticationException {

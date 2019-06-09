@@ -24,14 +24,14 @@ import sk.fri.uniza.auth.OAuth2Authenticator;
 import sk.fri.uniza.auth.OAuth2Authorizer;
 import sk.fri.uniza.auth.OAuth2Clients;
 import sk.fri.uniza.config.WindFarmDemoConfiguration;
+import sk.fri.uniza.core.Data;
+import sk.fri.uniza.core.Device;
 import sk.fri.uniza.core.User;
+import sk.fri.uniza.db.DataDao;
 import sk.fri.uniza.db.PersonDao;
 import sk.fri.uniza.db.UsersDao;
 import sk.fri.uniza.health.TemplateHealthCheck;
-import sk.fri.uniza.resources.HelloWorldResource;
-import sk.fri.uniza.resources.LoginResource;
-import sk.fri.uniza.resources.PersonResource;
-import sk.fri.uniza.resources.UsersResource;
+import sk.fri.uniza.resources.*;
 import sk.fri.uniza.views.ErrorView;
 
 import javax.ws.rs.core.MediaType;
@@ -43,6 +43,7 @@ public class WindFarmDemoApplication extends Application<WindFarmDemoConfigurati
 
     public static void main(final String[] args) throws Exception {
         new WindFarmDemoApplication().run(args);
+
     }
 
     @Override
@@ -55,7 +56,7 @@ public class WindFarmDemoApplication extends Application<WindFarmDemoConfigurati
      * Initialization of Hibernate ORM bundle.
      * Note: Add class that need to be mapped by Hibernate
      */
-    private final HibernateBundle<WindFarmDemoConfiguration> hibernate = new HibernateBundle<WindFarmDemoConfiguration>(User.class, Person.class, Phone.class) {
+    private final HibernateBundle<WindFarmDemoConfiguration> hibernate = new HibernateBundle<WindFarmDemoConfiguration>(User.class, Person.class, Phone.class, Data.class, Device.class) {
 
         @Override
         public PooledDataSourceFactory getDataSourceFactory(WindFarmDemoConfiguration windFarmDemoConfiguration) {
@@ -154,17 +155,22 @@ public class WindFarmDemoApplication extends Application<WindFarmDemoConfigurati
         // Create Dao access objects
         final UsersDao usersDao = UsersDao.createUsersDao(hibernate.getSessionFactory());
         final PersonDao personDao = new PersonDao(hibernate.getSessionFactory());
+        final DataDao dataDao = new DataDao(hibernate.getSessionFactory());
+
 
         KeyPair secreteKey = configuration.getOAuth2Configuration().getSecreteKey(false);
         final LoginResource loginResource = new LoginResource(secreteKey, usersDao, OAuth2Clients.getInstance());
         final UsersResource usersResource = new UsersResource(usersDao);
         final PersonResource personResource = new PersonResource(personDao);
+        final DataResource dataResource = new DataResource(dataDao);
 
         environment.jersey().register(helloWorldResource);
         environment.jersey().register(loginResource);
         environment.jersey().register(usersResource);
         environment.jersey().register(personResource);
-    }
+        environment.jersey().register(dataResource);
+
+     }
 
 }
 
