@@ -47,26 +47,23 @@ public class Data {
     // Hibernate need default constructor
     public Data() {
         Calendar cal=Calendar.getInstance();
-        dateOfStart=  "Y:"+cal.get(Calendar.YEAR)+" M:"+(cal.get(Calendar.MONTH)+1)+" D:"+cal.get(Calendar.DAY_OF_MONTH)+
-                " H:"+cal.get(Calendar.HOUR_OF_DAY)+" m:"+cal.get(Calendar.MINUTE)+" s:"+cal.get(Calendar.SECOND)+
-                " ms:"+cal.get(Calendar.MILLISECOND);
+        dateOfStart = cal.get(Calendar.DAY_OF_MONTH)+"."+(cal.get(Calendar.MONTH)+1)+"."+cal.get(Calendar.YEAR)+
+                "  " + cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE);
     }
 
     public Data(int idDevice) {
         this.idDevice = idDevice;
         Calendar cal=Calendar.getInstance();
-        dateOfStart=  "Y:"+cal.get(Calendar.YEAR)+" M:"+(cal.get(Calendar.MONTH)+1)+" D:"+cal.get(Calendar.DAY_OF_MONTH)+
-                " H:"+cal.get(Calendar.HOUR_OF_DAY)+" m:"+cal.get(Calendar.MINUTE)+" s:"+cal.get(Calendar.SECOND)+
-                " ms:"+cal.get(Calendar.MILLISECOND);
+        dateOfStart = cal.get(Calendar.DAY_OF_MONTH)+"."+(cal.get(Calendar.MONTH)+1)+"."+cal.get(Calendar.YEAR)+
+                "  " + cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE);
     }
 
     public Data(Float value, int idDevice) {
         this.value = value;
         this.idDevice = idDevice;
         Calendar cal=Calendar.getInstance();
-        dateOfStart=  "Y:"+cal.get(Calendar.YEAR)+" M:"+(cal.get(Calendar.MONTH)+1)+" D:"+cal.get(Calendar.DAY_OF_MONTH)+
-                " H:"+cal.get(Calendar.HOUR_OF_DAY)+" m:"+cal.get(Calendar.MINUTE)+" s:"+cal.get(Calendar.SECOND)+
-                " ms:"+cal.get(Calendar.MILLISECOND);
+        dateOfStart = cal.get(Calendar.DAY_OF_MONTH)+"."+(cal.get(Calendar.MONTH)+1)+"."+cal.get(Calendar.YEAR)+
+                "  " + cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE);
     }
 
     public Data(Long id, Float value, int idDevice) {
@@ -74,9 +71,8 @@ public class Data {
         this.value = value;
         this.idDevice = idDevice;
         Calendar cal=Calendar.getInstance();
-        dateOfStart=  "Y:"+cal.get(Calendar.YEAR)+" M:"+(cal.get(Calendar.MONTH)+1)+" D:"+cal.get(Calendar.DAY_OF_MONTH)+
-                " H:"+cal.get(Calendar.HOUR_OF_DAY)+" m:"+cal.get(Calendar.MINUTE)+" s:"+cal.get(Calendar.SECOND)+
-                " ms:"+cal.get(Calendar.MILLISECOND);
+        dateOfStart = cal.get(Calendar.DAY_OF_MONTH)+"."+(cal.get(Calendar.MONTH)+1)+"."+cal.get(Calendar.YEAR)+
+                "  " + cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE);
     }
 
     //@JsonProperty
