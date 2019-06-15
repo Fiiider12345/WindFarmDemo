@@ -22,16 +22,19 @@ public class DeviceDao extends AbstractDAO<Device> implements BasicDao<Device, L
 
     static {
         Device device1 = new DeviceBuilder()
-                .setContent("ahoj")
+                .setName("TempNimnica")
+                .setContent("Posli mi teplotu v Nimnici!")
                 .createDevice();
         Device device2 = new DeviceBuilder()
-                .setContent("niecoIne")
+                .setName("TempLondon")
+                .setContent("Posli mi teplotu v Londyne!")
                 .createDevice();
 
         deviceDB = Stream.generate(() -> new DeviceBuilder()
-                .setContent("lolo")
+                .setName("Something")
+                .setContent("Posli mi nieco!")
                 .createDevice())
-                .limit(100)
+                .limit(10)
                 .collect(Collectors.toList());
         deviceDB.add(device1);
         deviceDB.add(device2);

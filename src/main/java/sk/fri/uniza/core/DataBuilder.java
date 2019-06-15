@@ -5,7 +5,7 @@ public class DataBuilder {
     private Long id = null;
     private Float value;
     private int idDevice;
-    private String dateOfStart;
+    //private String dateOfStart;
 
     public DataBuilder setId(Long id) {
         this.id = id;
@@ -22,15 +22,15 @@ public class DataBuilder {
         return this;
     }
 
-    public DataBuilder setDateOfStart(String dateOfStart) {
+    /*public DataBuilder setDateOfStart(String dateOfStart) {
         this.dateOfStart = dateOfStart;
         return this;
-    }
+    }*/
 
     public Data createData() {
         if (id == null)
-            return new Data(value, idDevice, dateOfStart);
+            return new Data(value, idDevice);
         else
-            return new Data(id, value, idDevice, dateOfStart);
+            return new Data(id, value, idDevice);
     }
 }

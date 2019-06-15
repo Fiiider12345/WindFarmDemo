@@ -22,22 +22,19 @@ public class DataDao extends AbstractDAO<Data> implements BasicDao<Data, Long> {
 
     static {
         Data data1 = new DataBuilder()
-                .setValue(15.02f)
-                .setIdDevice(3)
-                .setDateOfStart("dnes")
+                .setValue(33.27f)
+                .setIdDevice(1)
                 .createData();
         Data data2 = new DataBuilder()
-                .setValue(18.02f)
-                .setIdDevice(4)
-                .setDateOfStart("zajtra")
+                .setValue(26.68f)
+                .setIdDevice(3)
                 .createData();
 
         dataDB = Stream.generate(() -> new DataBuilder()
                 .setValue(15.02f)
                 .setIdDevice(3)
-                .setDateOfStart("dnes")
                 .createData())
-                .limit(100)
+                .limit(10)
                 .collect(Collectors.toList());
 
         dataDB.add(data1);

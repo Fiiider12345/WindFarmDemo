@@ -26,18 +26,24 @@ public class Device {
 
     @JsonProperty
     @Column
+    private String name;
+
+    @JsonProperty
+    @Column
     private String content;
 
     // Hibernate need default constructor
     public Device() {
     }
 
-    public Device(String content) {
+    public Device(String name, String content) {
+        this.name = name;
         this.content = content;
     }
 
-    public Device(Long id, String content) {
+    public Device(Long id, String name, String content) {
         this.id = id;
+        this.name = name;
         this.content = content;
     }
 
@@ -57,5 +63,13 @@ public class Device {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

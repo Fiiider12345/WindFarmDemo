@@ -5,6 +5,7 @@ import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
 import javax.persistence.*;
+import java.util.Calendar;
 
 
 @Entity
@@ -45,19 +46,37 @@ public class Data {
 
     // Hibernate need default constructor
     public Data() {
+        Calendar cal=Calendar.getInstance();
+        dateOfStart=  "Y:"+cal.get(Calendar.YEAR)+" M:"+(cal.get(Calendar.MONTH)+1)+" D:"+cal.get(Calendar.DAY_OF_MONTH)+
+                " H:"+cal.get(Calendar.HOUR_OF_DAY)+" m:"+cal.get(Calendar.MINUTE)+" s:"+cal.get(Calendar.SECOND)+
+                " ms:"+cal.get(Calendar.MILLISECOND);
     }
 
-    public Data(Float value, int idDevice, String dateOfStart) {
+    public Data(int idDevice) {
+        this.idDevice = idDevice;
+        Calendar cal=Calendar.getInstance();
+        dateOfStart=  "Y:"+cal.get(Calendar.YEAR)+" M:"+(cal.get(Calendar.MONTH)+1)+" D:"+cal.get(Calendar.DAY_OF_MONTH)+
+                " H:"+cal.get(Calendar.HOUR_OF_DAY)+" m:"+cal.get(Calendar.MINUTE)+" s:"+cal.get(Calendar.SECOND)+
+                " ms:"+cal.get(Calendar.MILLISECOND);
+    }
+
+    public Data(Float value, int idDevice) {
         this.value = value;
         this.idDevice = idDevice;
-        this.dateOfStart = dateOfStart;
+        Calendar cal=Calendar.getInstance();
+        dateOfStart=  "Y:"+cal.get(Calendar.YEAR)+" M:"+(cal.get(Calendar.MONTH)+1)+" D:"+cal.get(Calendar.DAY_OF_MONTH)+
+                " H:"+cal.get(Calendar.HOUR_OF_DAY)+" m:"+cal.get(Calendar.MINUTE)+" s:"+cal.get(Calendar.SECOND)+
+                " ms:"+cal.get(Calendar.MILLISECOND);
     }
 
-    public Data(Long id, Float value, int idDevice, String dateOfStart) {
+    public Data(Long id, Float value, int idDevice) {
         this.id = id;
         this.value = value;
         this.idDevice = idDevice;
-        this.dateOfStart = dateOfStart;
+        Calendar cal=Calendar.getInstance();
+        dateOfStart=  "Y:"+cal.get(Calendar.YEAR)+" M:"+(cal.get(Calendar.MONTH)+1)+" D:"+cal.get(Calendar.DAY_OF_MONTH)+
+                " H:"+cal.get(Calendar.HOUR_OF_DAY)+" m:"+cal.get(Calendar.MINUTE)+" s:"+cal.get(Calendar.SECOND)+
+                " ms:"+cal.get(Calendar.MILLISECOND);
     }
 
     //@JsonProperty
