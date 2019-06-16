@@ -33,7 +33,7 @@ import java.util.Optional;
         @ApiImplicitParam(name = "Authorization", value = "Bearer token", required = false, dataType = "string", paramType = "header")
 )
 
-@Path("/device")
+@Path("/devices")
 public class DeviceResource {
     private final Logger myLogger = LoggerFactory.getLogger(this.getClass());
     private DeviceDao deviceDao;
@@ -93,7 +93,7 @@ public class DeviceResource {
     public Device getDeviceInfo(@ApiParam(hidden = true) @Auth User user, @PathParam("id") Long id) {
 
         if (!user.getRoles().contains(Role.ADMIN)) {
-            if (user.getId() != id) {
+            if (!user.getId().equals(id)) {
                 throw new WebApplicationException(Response.Status.UNAUTHORIZED);
             }
         }

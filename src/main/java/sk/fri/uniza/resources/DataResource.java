@@ -34,7 +34,7 @@ import java.util.Optional;
         @ApiImplicitParam(name = "Authorization", value = "Bearer token", required = false, dataType = "string", paramType = "header")
 )
 
-@Path("/data")
+@Path("/datas")
 public class DataResource {
     private final Logger myLogger = LoggerFactory.getLogger(this.getClass());
     private DataDao dataDao;
@@ -94,7 +94,7 @@ public class DataResource {
     public Data getDataInfo(@ApiParam(hidden = true) @Auth User user, @PathParam("id") Long id) {
 
         if (!user.getRoles().contains(Role.ADMIN)) {
-            if (user.getId() != id) {
+            if (!user.getId().equals(id)) {
                 throw new WebApplicationException(Response.Status.UNAUTHORIZED);
             }
         }

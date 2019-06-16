@@ -73,7 +73,7 @@ public class PersonResource {
     @RolesAllowed(Role.ADMIN)
     @ApiOperation(value = "Delete person", response = Person.class, authorizations = {@Authorization(value = "oauth2", scopes = {@AuthorizationScope(scope = Role.ADMIN, description = "Access to all resources")})})
     public Response deletePerson(@ApiParam(hidden = true) @Auth User user, @QueryParam("id") Long id) {
-        if (user.getId() != id) {
+        if (!user.getId().equals(id)) {
             Optional<Person> person1 = personDao.findById(id);
 
             return person1.map(person -> {
@@ -94,7 +94,7 @@ public class PersonResource {
     public Person getPersonInfo(@ApiParam(hidden = true) @Auth User user, @PathParam("id") Long id) {
 
         if (!user.getRoles().contains(Role.ADMIN)) {
-            if (user.getId() != id) {
+            if (!user.getId().equals(id)) {
                 throw new WebApplicationException(Response.Status.UNAUTHORIZED);
             }
         }
@@ -114,7 +114,7 @@ public class PersonResource {
     public Person setPersonInfo(@ApiParam(hidden = true) @Auth User user, @Valid Person person) {
 
         if (!user.getRoles().contains(Role.ADMIN)) {
-            if (user.getId() != person.getId()) {
+            if (!user.getId().equals(person.getId())) {
                 throw new WebApplicationException(Response.Status.UNAUTHORIZED);
             }
         }
