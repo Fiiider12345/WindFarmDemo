@@ -3,9 +3,13 @@ package sk.fri.uniza.core;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.util.Calendar;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 @Entity
