@@ -34,7 +34,7 @@ public class DataDao extends AbstractDAO<Data> implements BasicDao<Data, Long> {
                 .setValue(15.02f)
                 .setIdDevice(3)
                 .createData())
-                .limit(10)
+                .limit(5)
                 .collect(Collectors.toList());
 
         dataDB.add(data1);
