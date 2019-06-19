@@ -4,7 +4,9 @@ import io.swagger.annotations.ApiParam;
 
 import javax.ws.rs.QueryParam;
 
-
+/**
+ * Trieda definuje objekt OauthRequest, konstruktory, atributy a funkcie
+ */
 public class OauthRequest {
 
     @ApiParam(value = "The id of the application that asks for authorization", required = true)

@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+/**
+ * Trieda definuje objekt Phone, konstruktory, atributy a funkcie
+ */
 @Entity
 public class Phone {
 

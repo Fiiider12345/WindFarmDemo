@@ -8,6 +8,9 @@ import java.util.*;
 
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * Trieda definuje objekt OAuth2Clients, konstruktory, atributy a funkcie
+ */
 public class OAuth2Clients implements BasicDao<OAuth2Client, String> {
     private static OAuth2Clients instance = null;
     private static final Map<String, OAuth2Client> clientsDB;

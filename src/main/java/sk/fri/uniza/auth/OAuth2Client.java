@@ -1,7 +1,8 @@
 package sk.fri.uniza.auth;
 
-import javax.ws.rs.FormParam;
-
+/**
+ * Trieda definuje objekt OAuth2Client, konstruktory, atributy a funkcie
+ */
 public class OAuth2Client {
 
 

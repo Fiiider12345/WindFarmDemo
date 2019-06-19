@@ -9,6 +9,9 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import java.util.Set;
 
+/**
+ * Trieda definuje objekt Person, konstruktory, atributy a funkcie
+ */
 @Entity
 @DiscriminatorValue("Person")
 public class Person extends User {

@@ -2,6 +2,9 @@ package sk.fri.uniza.api;
 
 import javax.ws.rs.FormParam;
 
+/**
+ * Trieda definuje objekt LoginData, konstruktory, atributy a funkcie
+ */
 public class LoginData {
 
     @FormParam("username")

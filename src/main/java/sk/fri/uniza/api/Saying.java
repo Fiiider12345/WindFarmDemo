@@ -3,6 +3,9 @@ package sk.fri.uniza.api;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.Length;
 
+/**
+ * Trieda definuje objekt Saying, konstruktory, atributy a funkcie
+ */
 public class Saying {
     private long id;
 

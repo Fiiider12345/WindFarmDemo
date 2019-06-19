@@ -3,6 +3,9 @@ package sk.fri.uniza.api;
 import javax.ws.rs.FormParam;
 
 
+/**
+ * Trieda definuje objekt OauthTokenRequest, konstruktory, atributy a funkcie
+ */
 public class OauthTokenRequest {
 
     @FormParam("code")

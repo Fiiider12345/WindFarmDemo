@@ -1,5 +1,8 @@
 package sk.fri.uniza.auth;
 
+/**
+ * Trieda definuje objekt OAuth2ClientBuilder, konstruktory, atributy a funkcie
+ */
 public class OAuth2ClientBuilder {
     private String clientId;
     private String redirectUri;
