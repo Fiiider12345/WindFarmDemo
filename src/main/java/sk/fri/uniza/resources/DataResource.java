@@ -11,7 +11,9 @@ import sk.fri.uniza.api.Paged;
 import sk.fri.uniza.auth.Role;
 import sk.fri.uniza.core.Data;
 import sk.fri.uniza.core.User;
+import sk.fri.uniza.core.Weather;
 import sk.fri.uniza.db.DataDao;
+import sk.fri.uniza.db.DeviceDao;
 
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
@@ -118,6 +120,15 @@ public class DataResource {
                 throw new WebApplicationException(Response.Status.UNAUTHORIZED);
             //}
         }
+
+
+
+        String name = DeviceDao.getDeviceDB().get(data.getIdDevice()-1).getName();
+
+        Weather weather = new Weather(name, Weather.getDefaultApiKey(), "main", "temp");
+        Float number = Weather.callWeatherApi(weather);
+        data.setValue(number);
+
 
         if (data.getId() == null)
             // If no id is presented, person is saved as new instance

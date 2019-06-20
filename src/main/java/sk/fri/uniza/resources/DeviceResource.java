@@ -122,11 +122,14 @@ public class DeviceResource {
             // If no id is presented, person is saved as new instance
             try {
                 deviceDao.save(device);
+                DeviceDao.getDeviceDB().add(device);
             } catch (HibernateException e) {
                 throw new WebApplicationException(e.getMessage(), 422); //422 Unprocessable Entity - validation like errors
             }
-        else
+        else {
             deviceDao.update(device, null);
+            DeviceDao.getDeviceDB().add(device);
+        }
 
         return device;
     }
