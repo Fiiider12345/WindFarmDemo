@@ -46,10 +46,10 @@ public class DeviceResource {
     @UnitOfWork
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @RolesAllowed(Role.ADMIN)
+    @RolesAllowed({Role.ADMIN, Role.USER_READ_ONLY})
 
     // Swagger
-    @ApiOperation(value = "Obtain list of devices", response = Device.class, responseContainer = "List", authorizations = {@Authorization(value = "oauth2", scopes = {@AuthorizationScope(scope = Role.ADMIN, description = "Access to all resources")})})
+    @ApiOperation(value = "Obtain list of devices", response = Device.class, responseContainer = "List", authorizations = {@Authorization(value = "oauth2", scopes = {@AuthorizationScope(scope = Role.ADMIN, description = "Access to all resources"), @AuthorizationScope(scope = Role.USER_READ_ONLY, description = "Limited access")})})
     public Response getListOfData(@QueryParam("limit") Integer limit, @QueryParam("page") Integer page) {
         if (page == null) page = 1;
         if (limit != null) {
@@ -108,8 +108,8 @@ public class DeviceResource {
     @POST
     @UnitOfWork
     @Produces(MediaType.APPLICATION_JSON)
-    @RolesAllowed({Role.ADMIN, Role.USER_READ_ONLY})
-    @ApiOperation(value = "Save or update device", response = Device.class, authorizations = {@Authorization(value = "oauth2", scopes = {@AuthorizationScope(scope = Role.ADMIN, description = "Access to all resources"), @AuthorizationScope(scope = Role.USER_READ_ONLY, description = "Limited access")})})
+    @RolesAllowed(Role.ADMIN)
+    @ApiOperation(value = "Save or update device", response = Device.class, authorizations = {@Authorization(value = "oauth2", scopes = {@AuthorizationScope(scope = Role.ADMIN, description = "Access to all resources")})})
     public Device setDeviceInfo(@ApiParam(hidden = true) @Auth User user, @Valid Device device) {
 
         if (!user.getRoles().contains(Role.ADMIN)) {

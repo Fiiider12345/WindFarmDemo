@@ -49,10 +49,10 @@ public class DataResource {
     @UnitOfWork
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @RolesAllowed(Role.ADMIN)
+    @RolesAllowed({Role.ADMIN, Role.USER_READ_ONLY})
 
     // Swagger
-    @ApiOperation(value = "Obtain list of datas", response = Data.class, responseContainer = "List", authorizations = {@Authorization(value = "oauth2", scopes = {@AuthorizationScope(scope = Role.ADMIN, description = "Access to all resources")})})
+    @ApiOperation(value = "Obtain list of datas", response = Data.class, responseContainer = "List", authorizations = {@Authorization(value = "oauth2", scopes = {@AuthorizationScope(scope = Role.ADMIN, description = "Access to all resources"), @AuthorizationScope(scope = Role.USER_READ_ONLY, description = "Limited access")})})
     public Response getListOfData(@QueryParam("limit") Integer limit, @QueryParam("page") Integer page) {
         if (page == null) page = 1;
         if (limit != null) {
@@ -72,8 +72,8 @@ public class DataResource {
 
     @DELETE
     @UnitOfWork
-    @RolesAllowed(Role.ADMIN)
-    @ApiOperation(value = "Delete data", response = Data.class, authorizations = {@Authorization(value = "oauth2", scopes = {@AuthorizationScope(scope = Role.ADMIN, description = "Access to all resources")})})
+    @RolesAllowed({Role.ADMIN, Role.USER_READ_ONLY})
+    @ApiOperation(value = "Delete data", response = Data.class, authorizations = {@Authorization(value = "oauth2", scopes = {@AuthorizationScope(scope = Role.ADMIN, description = "Access to all resources"), @AuthorizationScope(scope = Role.USER_READ_ONLY, description = "Limited access")})})
     public Response deleteData(@ApiParam(hidden = true) @Auth User user, @QueryParam("id") Long id) {
         //if (user.getId() != id) {
             Optional<Data> data1 = dataDao.findById(id);
@@ -95,11 +95,11 @@ public class DataResource {
     @ApiOperation(value = "Find data by ID", response = Data.class, authorizations = {@Authorization(value = "oauth2", scopes = {@AuthorizationScope(scope = Role.ADMIN, description = "Access to all resources"), @AuthorizationScope(scope = Role.USER_READ_ONLY, description = "Limited access")})})
     public Data getDataInfo(@ApiParam(hidden = true) @Auth User user, @PathParam("id") Long id) {
 
-        if (!user.getRoles().contains(Role.ADMIN)) {
+        /*if (!user.getRoles().contains(Role.ADMIN)) {
             if (!user.getId().equals(id)) {
                 throw new WebApplicationException(Response.Status.UNAUTHORIZED);
             }
-        }
+        }*/
 
         Optional<Data> data = dataDao.findById(id);
         return data.orElseThrow(() -> {
@@ -114,14 +114,6 @@ public class DataResource {
     @RolesAllowed({Role.ADMIN, Role.USER_READ_ONLY})
     @ApiOperation(value = "Save or update data", response = Data.class, authorizations = {@Authorization(value = "oauth2", scopes = {@AuthorizationScope(scope = Role.ADMIN, description = "Access to all resources"), @AuthorizationScope(scope = Role.USER_READ_ONLY, description = "Limited access")})})
     public Data setDataInfo(@ApiParam(hidden = true) @Auth User user, @Valid Data data) {
-
-        if (!user.getRoles().contains(Role.ADMIN)) {
-            //if (user.getId() != data.getId()) {
-                throw new WebApplicationException(Response.Status.UNAUTHORIZED);
-            //}
-        }
-
-
 
         String name = DeviceDao.getDeviceDB().get(data.getIdDevice()-1).getName();
 
