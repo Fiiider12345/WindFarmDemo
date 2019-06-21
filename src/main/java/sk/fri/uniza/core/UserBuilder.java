@@ -33,7 +33,7 @@ public class UserBuilder {
 
     /**
      * setter
-     * @param roles Set<String></>
+     * @param roles Set
      * @return UserBuilder
      */
     public UserBuilder setRoles(Set<String> roles) {

@@ -68,7 +68,8 @@ public class Data {
 
     /**
      * Konstruktor, inicializuje premennu dateOfStart a parameter idDevice
-     * @param idDevice typ int
+     * @param idDevice int
+     * @param idUser int
      */
     public Data(int idDevice, int idUser) {
         this.idDevice = idDevice;
@@ -80,8 +81,9 @@ public class Data {
 
     /**
      * Konstruktor, inicializuje premennu dateOfStart a parametre value, idDevice
-     * @param value Float
+     * @param value float
      * @param idDevice int
+     * @param idUser int
      */
     public Data(Float value, int idDevice, int idUser) {
         this.value = value;
@@ -94,9 +96,10 @@ public class Data {
 
     /**
      * Konstruktor, inicializuje premennu dateOfStart a parametre id, value, idDevice
-     * @param id Long
-     * @param value Float
+     * @param id long
+     * @param value float
      * @param idDevice int
+     * @param idUser int
      */
     public Data(Long id, Float value, int idDevice, int idUser) {
         this.id = id;

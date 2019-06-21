@@ -109,9 +109,9 @@ public class UsersDao extends AbstractDAO<User> implements BasicDao<User, Long> 
     /**
      * https://www.baeldung.com/hibernate-pagination
      *
-     * @param limit
-     * @param page
-     * @return
+     * @param limit int
+     * @param page int
+     * @return list
      */
     @Override
     public Paged<List<User>> getAll(int limit, int page) {

@@ -74,7 +74,7 @@ public class User implements Principal {
      * Konstruktor, nastavi hotnoty podla parametrov
      * @param id Long
      * @param userName String
-     * @param roles Set<String>
+     * @param roles Set
      * @param password String
      */
     public User(Long id, String userName, Set<String> roles, String password) {
@@ -88,7 +88,7 @@ public class User implements Principal {
     /**
      * Konstruktor, nastavi hotnoty podla parametrov
      * @param userName String
-     * @param roles Set<String>
+     * @param roles Set
      * @param password String
      */
     public User(String userName, Set<String> roles, String password) {
@@ -103,7 +103,6 @@ public class User implements Principal {
      * @param salt     byte array of random generater salt
      * @param password String representing password
      * @return MD5 hashed password with salt
-     * @throws NoSuchAlgorithmException
      */
 
     public static byte[] generateHashSecrete(byte[] salt, String password) {
@@ -207,7 +206,7 @@ public class User implements Principal {
 
     /**
      * setter
-     * @param roles Set<String>
+     * @param roles Set
      **/
     public void setRoles(Set<String> roles) {
         this.roles = roles;
@@ -234,6 +233,8 @@ public class User implements Principal {
 
     /**
      * Test if entered password is correct
+     * @param password string
+     * @return boolean
      */
     public boolean testPassword(String password) {
         byte[] bytes = generateHashSecrete(this.salt, password);

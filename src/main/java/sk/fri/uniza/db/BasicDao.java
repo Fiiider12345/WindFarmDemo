@@ -13,9 +13,9 @@ public interface BasicDao<T, I> {
 
     /**
      * https://www.baeldung.com/hibernate-pagination
-     * @param limit
-     * @param page
-     * @return
+     * @param limit int
+     * @param page int
+     * @return list
      */
     Paged<List<T>> getAll(int limit, int page);
 

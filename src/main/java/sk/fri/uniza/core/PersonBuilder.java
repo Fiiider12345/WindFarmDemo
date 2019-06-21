@@ -28,7 +28,7 @@ public class PersonBuilder {
 
     /**
      * setter
-     * @param roles Set<String></>
+     * @param roles Set
      * @return PersonBuilder
      */
     public PersonBuilder setRoles(Set<String> roles) {
