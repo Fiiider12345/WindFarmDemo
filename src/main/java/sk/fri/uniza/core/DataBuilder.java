@@ -8,6 +8,7 @@ public class DataBuilder {
     private Long id = null;
     private Float value;
     private int idDevice;
+    private int idUser;
 
     /**
      * setter
@@ -39,14 +40,19 @@ public class DataBuilder {
         return this;
     }
 
+    public DataBuilder setIdUser(int idUser) {
+        this.idUser = idUser;
+        return this;
+    }
+
     /**
      * Vytvori objekt typu Data s nastavenymi hodnotami
      * @return new Data
      */
     public Data createData() {
         if (id == null)
-            return new Data(value, idDevice);
+            return new Data(value, idDevice, idUser);
         else
-            return new Data(id, value, idDevice);
+            return new Data(id, value, idDevice, idUser);
     }
 }

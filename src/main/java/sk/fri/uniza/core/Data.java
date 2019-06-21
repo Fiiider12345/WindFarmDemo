@@ -41,6 +41,10 @@ public class Data {
     @Column
     private String dateOfStart;
 
+    @JsonProperty
+    @Column
+    private int idUser;
+
     /**
      * Konstruktor vrati objekt Data z parametra
      * @param other typ Data
@@ -50,6 +54,7 @@ public class Data {
         this.value = other.value;
         this.idDevice = other.idDevice;
         this.dateOfStart = other.dateOfStart;
+        this.idUser = other.idUser;
     }
 
     /**
@@ -65,8 +70,9 @@ public class Data {
      * Konstruktor, inicializuje premennu dateOfStart a parameter idDevice
      * @param idDevice typ int
      */
-    public Data(int idDevice) {
+    public Data(int idDevice, int idUser) {
         this.idDevice = idDevice;
+        this.idUser = idUser;
         Calendar cal=Calendar.getInstance();
         dateOfStart = cal.get(Calendar.DAY_OF_MONTH)+"."+(cal.get(Calendar.MONTH)+1)+"."+cal.get(Calendar.YEAR)+
                 "  " + cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE);
@@ -77,9 +83,10 @@ public class Data {
      * @param value Float
      * @param idDevice int
      */
-    public Data(Float value, int idDevice) {
+    public Data(Float value, int idDevice, int idUser) {
         this.value = value;
         this.idDevice = idDevice;
+        this.idUser = idUser;
         Calendar cal=Calendar.getInstance();
         dateOfStart = cal.get(Calendar.DAY_OF_MONTH)+"."+(cal.get(Calendar.MONTH)+1)+"."+cal.get(Calendar.YEAR)+
                 "  " + cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE);
@@ -91,10 +98,11 @@ public class Data {
      * @param value Float
      * @param idDevice int
      */
-    public Data(Long id, Float value, int idDevice) {
+    public Data(Long id, Float value, int idDevice, int idUser) {
         this.id = id;
         this.value = value;
         this.idDevice = idDevice;
+        this.idUser = idUser;
         Calendar cal=Calendar.getInstance();
         dateOfStart = cal.get(Calendar.DAY_OF_MONTH)+"."+(cal.get(Calendar.MONTH)+1)+"."+cal.get(Calendar.YEAR)+
                 "  " + cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE);
@@ -162,5 +170,13 @@ public class Data {
      */
     public void setDateOfStart(String dateOfStart) {
         this.dateOfStart = dateOfStart;
+    }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
     }
 }

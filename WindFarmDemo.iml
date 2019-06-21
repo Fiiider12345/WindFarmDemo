@@ -244,5 +244,6 @@
     <orderEntry type="library" name="Maven: org.apache.maven.shared:file-management:3.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven.shared:maven-shared-io:3.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven:maven-compat:3.0" level="project" />
+    <orderEntry type="library" name="Maven: org.primefaces:primefaces:6.1" level="project" />
   </component>
 </module>
